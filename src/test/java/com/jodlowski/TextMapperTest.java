@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class TextMapperTest {
@@ -40,5 +41,10 @@ public class TextMapperTest {
     @Test
     public void testResultKeySetLength() {
         assertEquals(13, this.result.keySet().size());
+    }
+
+    @Test
+    public void testIfAllLettersInResultKeySet() {
+        assertTrue(this.result.keySet().containsAll(this.expected.keySet()));
     }
 }
