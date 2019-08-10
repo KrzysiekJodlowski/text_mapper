@@ -1,7 +1,7 @@
 package com.jodlowski;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.IntStream;
 
 
 public class TextMapper {
@@ -10,6 +10,8 @@ public class TextMapper {
     }
 
     public Map<Character, Set<String>> mapWordsToCharacters() {
-        return null;
+        Map<Character, Set<String>> result = new LinkedHashMap<>();
+        IntStream.range(0, 13).forEach(x -> result.put((char) x, new TreeSet<>()));
+        return result;
     }
 }

@@ -1,7 +1,11 @@
 package com.jodlowski;
 
 import org.junit.Before;
+import org.junit.Test;
+
 import java.util.*;
+
+import static org.junit.Assert.assertEquals;
 
 
 public class TextMapperTest {
@@ -31,5 +35,10 @@ public class TextMapperTest {
                 put('w', new TreeSet<>(Collections.singletonList("w")));
             }
         };
+    }
+
+    @Test
+    public void testResultKeySetLength() {
+        assertEquals(13, this.result.keySet().size());
     }
 }
