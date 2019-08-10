@@ -24,6 +24,7 @@ public class TextMapper {
                 .map(String::toLowerCase)
                 .flatMap(word -> Arrays.stream(word.split("")))
                 .map(str -> str.charAt(this.ZERO))
-                .distinct();
+                .distinct()
+                .sorted();
     }
 }

@@ -47,4 +47,12 @@ public class TextMapperTest {
     public void testIfAllLettersInResultKeySet() {
         assertTrue(this.result.keySet().containsAll(this.expected.keySet()));
     }
+
+    @Test
+    public void testResultKeySetAlphabeticOrder() {
+        Iterator keySetIterator =  this.result.keySet().iterator();
+        assertEquals('a', keySetIterator.next());
+        assertEquals('d', keySetIterator.next());
+        assertEquals('e', keySetIterator.next());
+    }
 }
