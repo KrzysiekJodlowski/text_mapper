@@ -10,13 +10,12 @@ import static org.junit.Assert.*;
 
 public class TextMapperTest {
 
-    private TextMapper textMapper;
     private Map<Character, Set<String>> result;
     private Map<Character, Set<String>> expected;
 
     @Before
     public void initializeMapper() {
-        this.textMapper = new TextMapper("Ala ma kota, kot KODUJE - w Javie kota!");
+        TextMapper textMapper = new TextMapper("Ala ma kota, kot KODUJE - w Javie kota!");
         this.result = textMapper.mapWordsToCharacters();
         this.expected = new LinkedHashMap<Character, Set<String>>() {
             {

@@ -19,7 +19,7 @@ public class TextMapper {
     public Map<Character, Set<String>> mapWordsToCharacters() {
 
         return this.getStreamOfChars()
-                .collect(Collectors.toMap(Character::new,
+                   .collect(Collectors.toMap(Character::new,
                         this.getWordsContainingCharacter(),
                         (x, y) -> x,
                         LinkedHashMap::new));
@@ -27,23 +27,23 @@ public class TextMapper {
 
     private Stream<Character> getStreamOfChars() {
         return this.listOfWords.stream()
-                .flatMap(word -> Arrays.stream(word.split("")))
-                .map(str -> str.charAt(this.ZERO))
-                .distinct()
-                .sorted();
+                   .flatMap(word -> Arrays.stream(word.split("")))
+                   .map(str -> str.charAt(this.ZERO))
+                   .distinct()
+                   .sorted();
     }
 
     private List<String> getListOfWords(String inputText) {
         return Arrays.stream(inputText.split("[^a-zA-Z]+"))
-                .map(String::toLowerCase)
-                .collect(Collectors.toList());
+                     .map(String::toLowerCase)
+                     .collect(Collectors.toList());
     }
 
     private Function<Character, Set<String>> getWordsContainingCharacter() {
         return character ->
                 this.listOfWords.stream()
-                        .filter(word -> word.indexOf(character) >= this.ZERO)
-                        .collect(Collectors.toCollection(TreeSet::new));
+                                .filter(word -> word.indexOf(character) >= this.ZERO)
+                                .collect(Collectors.toCollection(TreeSet::new));
     }
 
     private void checkInputText(String inputText) {
