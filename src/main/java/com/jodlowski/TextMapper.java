@@ -12,6 +12,7 @@ public class TextMapper {
     private final int ZERO = 0;
 
     public TextMapper(String inputText) {
+        this.checkInputText(inputText);
         this.listOfWords = this.getListOfWords(inputText);
     }
 
@@ -43,5 +44,13 @@ public class TextMapper {
                 this.listOfWords.stream()
                         .filter(word -> word.indexOf(character) >= this.ZERO)
                         .collect(Collectors.toCollection(TreeSet::new));
+    }
+
+    private void checkInputText(String inputText) {
+        if (inputText == null ) {
+            throw new NullPointerException("Input text value is null!");
+        } else if (inputText.length() == this.ZERO) {
+            throw new InputMismatchException("Input text can't be empty!");
+        }
     }
 }

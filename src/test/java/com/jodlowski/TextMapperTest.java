@@ -85,4 +85,14 @@ public class TextMapperTest {
         assertEquals("kota", letterAValuesIterator.next());
         assertEquals("ma", letterAValuesIterator.next());
     }
+
+    @Test
+    public void testIfThrowsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new TextMapper(null));
+    }
+
+    @Test
+    public void testIfThrowsInputMismatchException() {
+        assertThrows(InputMismatchException.class, () -> new TextMapper(""));
+    }
 }
