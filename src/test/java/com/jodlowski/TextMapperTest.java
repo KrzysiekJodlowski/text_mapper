@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class TextMapperTest {
@@ -54,5 +53,36 @@ public class TextMapperTest {
         assertEquals('a', keySetIterator.next());
         assertEquals('d', keySetIterator.next());
         assertEquals('e', keySetIterator.next());
+    }
+
+    @Test
+    public void testResultValues() {
+        assertEquals(this.expected.get('a'), this.result.get('a'));
+        assertEquals(this.expected.get('k'), this.result.get('k'));
+        assertEquals(this.expected.get('m'), this.result.get('m'));
+    }
+
+    @Test
+    public void testPunctuationMarksInsensitivity() {
+        assertFalse(this.result.containsKey("-"));
+        assertFalse(this.result.get('a').contains("kota,"));
+        assertFalse(this.result.get('a').contains("kota!"));
+    }
+
+    @Test
+    public void testCaseInsensitivity() {
+        assertFalse(this.result.containsKey('J'));
+        assertFalse(this.result.get('j').contains("Javie"));
+        assertFalse(this.result.containsKey('K'));
+        assertFalse(this.result.get('k').contains("KODUJE"));
+    }
+
+    @Test
+    public void testResultValuesAlphabeticOrder() {
+        Iterator letterAValuesIterator = this.result.get('a').iterator();
+        assertEquals("ala", letterAValuesIterator.next());
+        assertEquals("javie", letterAValuesIterator.next());
+        assertEquals("kota", letterAValuesIterator.next());
+        assertEquals("ma", letterAValuesIterator.next());
     }
 }

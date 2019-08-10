@@ -1,30 +1,47 @@
 package com.jodlowski;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
 public class TextMapper {
 
-    String inputText;
+    private List<String> listOfWords;
     private final int ZERO = 0;
 
     public TextMapper(String inputText) {
-        this.inputText = inputText;
+        this.listOfWords = this.getListOfWords(inputText);
     }
 
     public Map<Character, Set<String>> mapWordsToCharacters() {
-        Map<Character, Set<String>> result = new LinkedHashMap<>();
-        this.getStreamOfChars().forEach(character -> result.put(character, new TreeSet<>()));
-        return result;
+
+        return this.getStreamOfChars()
+                .collect(Collectors.toMap(Character::new,
+                        this.getWordsContainingCharacter(),
+                        (x, y) -> x,
+                        LinkedHashMap::new));
     }
 
     private Stream<Character> getStreamOfChars() {
-        return Arrays.stream(inputText.split("[^a-zA-Z]+"))
-                .map(String::toLowerCase)
+        return this.listOfWords.stream()
                 .flatMap(word -> Arrays.stream(word.split("")))
                 .map(str -> str.charAt(this.ZERO))
                 .distinct()
                 .sorted();
+    }
+
+    private List<String> getListOfWords(String inputText) {
+        return Arrays.stream(inputText.split("[^a-zA-Z]+"))
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
+    }
+
+    private Function<Character, Set<String>> getWordsContainingCharacter() {
+        return character ->
+                this.listOfWords.stream()
+                        .filter(word -> word.indexOf(character) >= this.ZERO)
+                        .collect(Collectors.toCollection(TreeSet::new));
     }
 }
